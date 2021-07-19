@@ -131,9 +131,9 @@ void project15::Cooperation::deleteOwner() {
     std::cout << "Choose an apartament ID: ";
     std::cin >> apartamentId;
 
-    unsigned idx = getApartamentIdxByApartamentId(apartamentId);
+    int idx = getApartamentIdxByApartamentId(apartamentId);
 
-    if (!idx) {
+    if (idx == -1) {
         std::cout << "There is no apartament with that ID." << std::endl;
         return;
     }
