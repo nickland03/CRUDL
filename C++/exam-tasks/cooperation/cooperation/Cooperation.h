@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include "Apartament.h"
+#include "../apartament/Apartament.h"
 
 namespace project15 {
 	class Cooperation

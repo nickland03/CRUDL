@@ -1,5 +1,5 @@
-#include "Apartament.h"
-#include "Cooperation.h"
+#include "apartament/Apartament.h"
+#include "cooperation/Cooperation.h"
 #include <iostream>
 
 int main() {
