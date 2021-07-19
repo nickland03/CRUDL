@@ -5,7 +5,7 @@ class Medicine
 {
 public:
 	Medicine();
-	Medicine(std::string name, std::string id, std::string package, float unitPrice, int quanity);
+	Medicine(std::string  name, std::string  id, std::string  package, float unitPrice, int quantity);
 	void printData() const;
 	void readData();
 	bool operator>(Medicine const& other) const;

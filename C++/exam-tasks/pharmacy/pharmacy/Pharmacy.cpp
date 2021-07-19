@@ -2,6 +2,7 @@
 #include "Pharmacy.h"
 #include <string>
 #include <iomanip>
+#include <utility>
 
 Pharmacy::Pharmacy()
 {
@@ -20,7 +21,7 @@ Pharmacy::Pharmacy()
 
 Pharmacy::Pharmacy(std::string name, unsigned int medsAmount)
 {
-	m_name = name;
+	m_name = std::move(name);
 	m_medsAmount = medsAmount;
 
 	m_medicines = new Medicine[m_medsAmount];
@@ -119,7 +120,7 @@ void Pharmacy::printCheapestByMedName() const
 	cheapest.printData();
 }
 
-bool Pharmacy::hasMedicineByRegId(std::string regId) const
+bool Pharmacy::hasMedicineByRegId(const std::string& regId) const
 {
 	for (unsigned int i = 0; i < m_medsAmount; i++) {
 		if (m_medicines[i].getId() == regId) {
@@ -129,7 +130,7 @@ bool Pharmacy::hasMedicineByRegId(std::string regId) const
 	return false;
 }
 
-bool Pharmacy::hasMedicineByName(std::string name) const
+bool Pharmacy::hasMedicineByName(const std::string& name) const
 {
 	for (unsigned int i = 0; i < m_medsAmount; i++) {
 		if (m_medicines[i].getName() == name) {

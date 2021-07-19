@@ -1,13 +1,13 @@
 #include "Medicine.h"
-#include <string>
 #include <iomanip>
+#include <utility>
 
 Medicine::Medicine()
 	: m_name(""), m_id(""), m_package(""), m_unitPrice(0), m_quantity(0)
 {}
 
-Medicine::Medicine(std::string name, std::string id, std::string package, float unitPrice, int quanity)
-	: m_name(name), m_id(id), m_package(package), m_unitPrice(unitPrice), m_quantity(quanity)
+Medicine::Medicine(std::string  name, std::string  id, std::string  package, float unitPrice, int quantity)
+	: m_name(std::move(name)), m_id(std::move(id)), m_package(std::move(package)), m_unitPrice(unitPrice), m_quantity(quantity)
 {}
 
 void Medicine::printData() const
