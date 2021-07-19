@@ -1,3 +1,4 @@
+#include <utility>
 #include "Cooperation.h"
 
 project15::Cooperation::Cooperation()
@@ -18,7 +19,7 @@ project15::Cooperation::Cooperation()
 
 project15::Cooperation::Cooperation(std::string name, unsigned int size)
 {
-	m_name = name;
+	m_name = std::move(name);
 	m_size = size;
 
 	std::cout << "\tThere are " << m_size << " available apartament(s)." << std::endl;
@@ -101,14 +102,13 @@ bool project15::Cooperation::ownerExists(const std::string& owner) const
 	return false;
 }
 
-bool project15::Cooperation::ApartamentExists(unsigned int apartamentId) const
-{
-	for (unsigned int i = 0; i < m_size; i++) {
-		if (apartamentId == i + 1) {
-			return true;
+int project15::Cooperation::GetApartamentIdxByApartamentId(unsigned int apartamentId) const {
+	for (int i = 0; i < m_size; i++) {
+		if (apartamentId == m_apartaments[i].getID()) {
+			return i;
 		}
 	}
-	return false;
+	return -1;
 }
 
 bool project15::Cooperation::hasApartamentOnFloor(unsigned int floor) const {
@@ -120,17 +120,20 @@ bool project15::Cooperation::hasApartamentOnFloor(unsigned int floor) const {
 	return false;
 }
 
-void project15::Cooperation::renewOwner()
+void project15::Cooperation::renewOwner() const
 {
-	int apartamentId;
+	unsigned int apartamentId;
 	std::cout << "Choose an apartament ID: ";
 	std::cin >> apartamentId;
 
-	if (!ApartamentExists(apartamentId)) {
+	int idx = GetApartamentIdxByApartamentId(apartamentId);
+
+	if (idx == -1) {
 		std::cout << "There is no apartament with that ID." << std::endl;
 		return;
 	}
-	m_apartaments[apartamentId - 1].setNewOwner();
+
+	m_apartaments[idx].setNewOwner();
 }
 
 void project15::Cooperation::deleteOwner()
@@ -139,15 +142,17 @@ void project15::Cooperation::deleteOwner()
 	std::cout << "Choose an apartament ID: ";
 	std::cin >> apartamentId;
 
-	if (!ApartamentExists(apartamentId)) {
-		std::cout << "There is no apartament with that ID." << std::endl;
-		return;
-	}
+    unsigned idx = GetApartamentIdxByApartamentId(apartamentId);
 
-	m_apartaments[apartamentId - 1].deleteOwner();
+    if (!idx) {
+        std::cout << "There is no apartament with that ID." << std::endl;
+        return;
+    }
+
+	m_apartaments[idx].deleteOwner();
 }
 
-void project15::Cooperation::fetchMenu() const
+void project15::Cooperation::fetchMenu()
 {
 	std::cout << "\t\t Menu " << std::endl;
 	std::cout << "\t 1. Print all apartaments." << std::endl;
@@ -185,7 +190,6 @@ void project15::Cooperation::start()
 			break;
 		case 0:
 			exit(1);
-			break;
 		default:
 			std::cout << "Incorrect option." << std::endl;
 		}

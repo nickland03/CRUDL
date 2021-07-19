@@ -1,5 +1,7 @@
 #include "Apartament.h"
 
+#include <utility>
+
 project15::Apartament::Apartament()
 	: m_id(0), m_owner(""), m_floor(0), m_residents(0)
 {}
@@ -9,7 +11,7 @@ project15::Apartament::Apartament(
 	std::string owner, 
 	unsigned int floor, 
 	unsigned int residents
-) : m_id(id), m_owner(owner), m_floor(floor), m_residents(residents)
+) : m_id(id), m_owner(std::move(owner)), m_floor(floor), m_residents(residents)
 {}
 
 void project15::Apartament::printData() const

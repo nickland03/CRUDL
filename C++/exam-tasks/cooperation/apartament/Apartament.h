@@ -1,8 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
-
-const std::string NO_AVAILABLE_OWNER  = "Currently has no owner";
+#include "constants/strings.h"
 
 namespace project15 {
 	class Apartament

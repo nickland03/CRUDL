@@ -8,7 +8,7 @@ namespace project15 {
 	{
 	private:
 		std::string m_name;
-		unsigned int m_size;
+		unsigned int m_size{};
 		Apartament* m_apartaments;
 	public:
 		Cooperation();
@@ -19,11 +19,11 @@ namespace project15 {
 		void printByBiggestFamilyOnFloor() const;
 		unsigned int getApartamentIdByOwner(const std::string& owner) const;
 		bool ownerExists(const std::string& owner) const;
-		bool ApartamentExists(unsigned int number) const;
+        int GetApartamentIdxByApartamentId(unsigned int apartamentId) const;
 		bool hasApartamentOnFloor(unsigned int floor) const;
-		void renewOwner();
+		void renewOwner() const;
 		void deleteOwner();
-		void fetchMenu() const;
+		static void fetchMenu();
 		void start();
 	};
 }
